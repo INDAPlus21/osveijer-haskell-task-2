@@ -41,17 +41,11 @@ averageLength x = fromIntegral(totalLength x)/fromIntegral(length x)
 medellangd :: String -> Float 
 medellangd x = averageLength( splitWords x )
 
-removeElement _ [] = []
-removeElement x (y:ys)  | x == y = ys
-                        | otherwise = y : removeElement x ys
+varannan :: [a] -> [a]
+varannan [] = []
+varannan (x:y:xs) = x: varannan xs
+varannan (x:xs) = [x]
 
-forsta [] [] = []
-forsta [] y = forsta y y
-forsta (x:xs) y = x : andra xs (removeElement x y)
-
-andra [] [] = []
-andra [] y = forsta y y
-andra (x:xs) y = forsta xs y
-
+skyffla :: [a] -> [a]
 skyffla [] = []
-skyffla x = forsta x x
+skyffla (x:xs) = concat (varannan (x:xs) : [skyffla (varannan xs)])
